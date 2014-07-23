@@ -9,7 +9,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 mkdir -p $DIR/output
 
 # render each scene
-for path in $DIR/*.blend
+for path in $(find $DIR/scenes -iname '*.blend')
 do
     filename=$(basename $path)
     name="${filename%.*}"
@@ -17,7 +17,7 @@ do
 
     blender \
         --background $path \
-        --render-output "//output/${name}_#.png" \
+        --render-output "$DIR/output/${name}_#.png" \
         --engine CYCLES \
         --render-format PNG \
         --use-extension 1 \
